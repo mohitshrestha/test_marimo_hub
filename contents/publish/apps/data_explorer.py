@@ -153,32 +153,32 @@ def _():
 
 
 @app.cell
-# -----------------------------
-# File Loading
-# -----------------------------
-@app.cell
-def load_file(file_widget, schema_overrides: dict) -> pl.DataFrame | None:
-    """
-    Load the first uploaded CSV or Excel file into a Polars DataFrame.
-    Returns None if no file is uploaded.
-    """
-    # Try to get the first file
-    file_bytes = file_widget.contents(0)
-    file_name = file_widget.name(0)
+def _(SCHEMA_OVERRIDES):
+    # -----------------------------
+    # File Loading
+    # -----------------------------
+    def load_file(file_widget) -> pl.DataFrame | None:
+        """
+        Load the first uploaded CSV or Excel file into a Polars DataFrame.
+        Returns None if no file is uploaded.
+        """
+        # Try to get the first file
+        file_bytes = file_widget.contents(0)
+        file_name = file_widget.name(0)
 
-    # Check if a file was actually uploaded
-    if file_bytes is None or file_name is None:
-        return None
+        # Check if a file was actually uploaded
+        if file_bytes is None or file_name is None:
+            return None
 
-    if file_name.lower().endswith(".csv"):
-        df = pl.read_csv(io.BytesIO(file_bytes), schema_overrides=schema_overrides)
-    elif file_name.lower().endswith((".xls", ".xlsx")):
-        df = pl.read_excel(io.BytesIO(file_bytes), schema_overrides=schema_overrides)
-    else:
-        raise ValueError(f"Unsupported file type: {file_name}")
+        if file_name.lower().endswith(".csv"):
+            df = pl.read_csv(io.BytesIO(file_bytes), schema_overrides=SCHEMA_OVERRIDES)
+        elif file_name.lower().endswith((".xls", ".xlsx")):
+            df = pl.read_excel(io.BytesIO(file_bytes), schema_overrides=SCHEMA_OVERRIDES)
+        else:
+            raise ValueError(f"Unsupported file type: {file_name}")
 
-    return df
-
+        return df
+    return (load_file,)
 
 
 @app.cell
@@ -922,3 +922,4 @@ def _():
 
 if __name__ == "__main__":
     app.run()
+
