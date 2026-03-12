@@ -12,6 +12,7 @@ with app.setup:
     import io
     import altair as alt
     from datetime import datetime
+    import tzdata
     from zoneinfo import ZoneInfo
 
 
@@ -924,4 +925,5 @@ def _():
 
 if __name__ == "__main__":
     app.run()
+
 
