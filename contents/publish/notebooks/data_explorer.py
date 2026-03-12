@@ -259,13 +259,9 @@ def _(clean_column_names, format_phone):
         df = clean_column_names(df)
 
         # Format phone numbers
+        # Use utility function for phone numbers
         df = df.with_columns(
-            pl.col("phone")
-            .str.replace_all(r"\D", "")
-            .str.slice(-10)
-            .str.pad_start(10, "0")
-            .str.replace(r"(\d{3})(\d{3})(\d{4})", r"+1 (\1) \2-\3")
-            .alias("phone")
+            pl.col("phone").map_elements(format_phone, return_dtype=pl.Utf8)
         )
 
 
@@ -925,5 +921,6 @@ def _():
 
 if __name__ == "__main__":
     app.run()
+
 
 
