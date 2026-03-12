@@ -54,6 +54,6 @@ autosave_delay = 1000
 format_on_save = true
 
 [tool.marimo_hub]
-base_url = "https://mohitshrestha.github.io/marimo-uv-starter-template/"
+base_url = "https://mohitshrestha.github.io/test_marimo_hub/"
 output_dir = "_site"
 content_dir = "contents/publish"
