@@ -1,0 +1,59 @@
+[project]
+description = "A starter template for marimo notebooks with uv"
+name = "marimo-template"
+requires-python = ">=3.12"
+version = "0.1.0"
+dependencies = [
+    "altair>=6.0.0",
+    "pandas>=3.0.1",
+    "polars>=1.38.1",
+    "pyarrow>=23.0.1",
+]
+
+[dependency-groups]
+dev = [
+  "marimo>=0.20.4",
+  "pre-commit>=4.5.1",
+  "pytest>=9.0.2",
+  "ruff>=0.15.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["./src"]
+testpaths = ["tests", "marimo_template"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I", # isort
+  "B", # flake8-bugbear
+  "UP", # pyupgrade
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Notebooks use standalone expressions to render UI elements
+"contents/**/*.py" = ["B018"]
+
+[tool.marimo.ai]
+rules = "- prefer polars over pandas\n- make charts using altair"
+
+[tool.marimo.package_management]
+manager = "uv"
+
+[tool.marimo.runtime]
+pythonpath = ["./src"]
+
+[tool.marimo.save]
+autosave = "after_delay"
+autosave_delay = 1000
+format_on_save = true
+
+[tool.marimo_hub]
+base_url = "https://mohitshrestha.github.io/marimo-uv-starter-template/"
+output_dir = "_site"
+content_dir = "contents/publish"

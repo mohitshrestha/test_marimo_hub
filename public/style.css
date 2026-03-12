@@ -1,0 +1,37 @@
+/* Tighter vertical typography */
+body { line-height: 1.5; }
+
+/* Category Pill Styling */
+.filter-pill {
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.filter-pill:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+/* Active Pill State */
+.filter-pill.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+/* Card Improvements */
+.project-card:hover { transform: translateY(-2px); }
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
